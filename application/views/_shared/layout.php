@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="apps" ng-controller="indexController">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,6 +26,11 @@
   <link rel="stylesheet" href="<?=base_url()?>public/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=base_url()?>public/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/plugins/angular-datatables/dist/css/angular-datatables.min.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+<link rel="stylesheet" href="<?=base_url()?>public/plugins/sweetalert2/sweetalert2.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -133,104 +138,8 @@
       </div>
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="../../index.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../../index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../../index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Widgets
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Layout Options
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="../layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../layout/top-nav-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation + Sidebar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../layout/boxed.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Boxed</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../layout/fixed-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Sidebar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../layout/fixed-topnav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Navbar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../layout/fixed-footer.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Footer</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../layout/collapsed-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Collapsed Sidebar</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
+      <?php $this->load->view("_shared/sidebar"); ?>
+      
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
@@ -243,12 +152,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Advanced Form</h1>
+            <h1>{{header}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Advanced Form</li>
+              <li class="breadcrumb-item"><a href="<?=base_url('home')?>">Home</a></li>
+              <li class="breadcrumb-item active">{{breadcrumb}}</li>
             </ol>
           </div>
         </div>
@@ -259,27 +168,7 @@
     <section class="content">
       <div class="container-fluid">
         <!-- SELECT2 EXAMPLE -->
-        <div class="card card-default">
-          <div class="card-header">
-            <h3 class="card-title">Select2 (Default Theme)</h3>
-
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-remove"></i></button>
-            </div>
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body">
-            <div class="row">
-
-            </div>
-          </div>
-          <!-- /.card-body -->
-          <div class="card-footer">
-            <!-- Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
-            the plugin. -->
-          </div>
-        </div>
+        <?= $content ?>
         <!-- /.card -->
       </div><!-- /.container-fluid -->
     </section>
@@ -304,6 +193,16 @@
 
 <!-- jQuery -->
 <script src="<?=base_url()?>public/plugins/jquery/jquery.min.js"></script>
+<!-- Angular -->
+<script src="<?=base_url()?>public/libs/angular/angular.min.js"></script>
+<script src="<?=base_url()?>public/js/apps.js"></script>
+<script src="<?=base_url()?>public/js/services/helper.services.js"></script>
+<script src="<?=base_url()?>public/js/services/auth.services.js"></script>
+<script src="<?=base_url()?>public/js/services/admin.services.js"></script>
+<script src="<?=base_url()?>public/js/controllers/admin.controllers.js"></script>
+<script src="<?=base_url()?>public/libs/input-mask/angular-input-masks-standalone.min.js"></script>
+<script src="<?=base_url()?>public/libs/angular-locale_id-id.js"></script>
+<script src="<?=base_url()?>public/libs/angular-base64-upload.js"></script>
 <!-- Bootstrap 4 -->
 <script src="<?=base_url()?>public/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Select2 -->
@@ -326,6 +225,17 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?=base_url()?>public/dist/js/demo.js"></script>
 <!-- Page script -->
+<script src="<?=base_url()?>public/libs/jquery.PrintArea.js"></script>
+<script src="<?=base_url()?>public/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="<?=base_url()?>public/plugins/loading/dist/loadingoverlay.min.js"></script>
+<!-- Data Table -->
+<script src="<?=base_url()?>public/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?=base_url()?>public/plugins/angular-datatables/dist/angular-datatables.min.js"></script>
+<script src="<?=base_url()?>public/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="<?=base_url()?>public/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="<?=base_url()?>public/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="<?=base_url()?>public/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="<?=base_url()?>public/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script>
   $(function () {
     //Initialize Select2 Elements
